@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Cyberpunk Motion Logo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      font-family: 'Courier New', monospace;
+      color: #00ffcc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .line {
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #00ffcc;
+      margin: 10px 0;
+      opacity: 0;
+    }
+
+    .glitch {
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      50% { text-shadow: -2px 0 cyan; }
+      100% { text-shadow: 2px 0 red; }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .flash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: white;
+      opacity: 0;
+      z-index: 10;
+      animation: flashAnim 0.2s forwards;
+    }
+
+    @keyframes flashAnim {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .final {
+      color: lime;
+      font-size: 1.5rem;
+      opacity: 0;
+    }
+
+    .blood {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="line" id="line1"></div>
+  <div class="line" id="line2"></div>
+  <div class="line" id="line3"></div>
+  <div class="line" id="line4"></div>
+  <div class="line" id="line5" class="blood"></div>
+  <div class="final" id="access">[ صفاء ساهي قادم قريبا اختبأ ]</div>
+</div>
+<div id="flash" class="flash" style="display:none;"></div>
+
+<script>
+  const lines = [
+    { text: "لا تبحث عن الباب...", id: "line1", delay: 0 },
+    { text: "🗝️ اصنع مفتاحك الخاص.", id: "line2", delay: 2500 },
+    { text: "صوت الصمت أحيانًا يصرخ...", id: "line3", delay: 5000 },
+    { text: "والأبواب ليست مغلقة، بل منتظرة.", id: "line4", delay: 7500 },
+    { text: "🩸 هل تعرف الطريق... هل تجرؤ؟", id: "line5", delay: 10000 },
+  ];
+
+  const access = document.getElementById("access");
+  const flash = document.getElementById("flash");
+
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(line.id);
+      el.classList.add("fade-in", "glitch");
+      el.textContent = line.text;
+    }, line.delay);
+  });
+
+  setTimeout(() => {
+    flash.style.display = "block";
+    flash.classList.add("flash");
+  }, 12500);
+
+  setTimeout(() => {
+    access.style.opacity = 1;
+  }, 13500);
+</script>
+
+</body>
+</html>
